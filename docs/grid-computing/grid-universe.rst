@@ -975,7 +975,7 @@ The following table summarizes how job classad attributes will be translated int
 +-------------------+---------------------+
 | ``Queue``         | ``--clusters``      |
 +-------------------+---------------------+
-| *Unsupported*     | ``--cpus-per-task`` |
+| ``NodeNumber``    | ``--cpus-per-task`` |
 +-------------------+---------------------+
 
 Note that for Slurm, ``Queue`` is used for both ``--partition`` and ``--clusters``. If you use the ``partition@cluster`` syntax, the partition will be set to whatever is before the ``@``, and the cluster to whatever is after the ``@``. If you only wish to set the cluster, leave out the partition (e.g. use ``@cluster``).

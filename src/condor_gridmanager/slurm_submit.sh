@@ -80,9 +80,11 @@ fi
 [ -z "$bls_opt_queue" ] || grep -q "^#SBATCH -p" $bls_tmp_file || echo "#SBATCH -p $bls_opt_queue" >> $bls_tmp_file
 [ -z "$cluster_name" ] || grep -q "^#SBATCH -M" $bls_tmp_file || echo "#SBATCH -M $cluster_name" >> $bls_tmp_file
 
-# Simple support for multi-cpu attributes
+# Support for multi-core attributes
 if [[ $bls_opt_mpinodes -gt 1 ]] ; then
-  echo "#SBATCH -N $bls_opt_mpinodes" >> $bls_tmp_file
+  echo "#SBATCH --nodes=1" >> $bls_tmp_file
+  echo "#SBATCH --ntasks=1" >> $bls_tmp_file
+  echo "#SBATCH --cpus-per-task=$bls_opt_mpinodes" >> $bls_tmp_file
 fi
 
 
@@ -121,6 +123,7 @@ if [ "$cluster_name" != "" ] ; then
 fi
 
 echo "BLAHP_JOBID_PREFIX$blahp_jobID"
+logger "Running SLURM job $jobID in $PWD"
   
 bls_wrap_up_submit
 
